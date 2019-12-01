@@ -7,16 +7,19 @@ let pkg = require( './package.json' ),
     gulp = require( 'gulp' ),
     autoprefixer = require( 'gulp-autoprefixer' ),
     concat = require( 'gulp-concat' ),
+    csso = require( 'gulp-csso' ),
     lineec = require( 'gulp-line-ending-corrector' ),
     notify = require( 'gulp-notify' ),
-    sass = require( 'gulp-sass' );
+    rename = require( 'gulp-rename' ),
+    sass = require( 'gulp-sass' )
+    terser = require( 'gulp-terser' );
 
 // Set default source/destination paths
-let src = { sass: './public/src/scss', js: './public/src/js' },
+let src = { sass: './public/src/scss', js: './public/src/js', vendor: './public/src/vendor' },
     dest = { css: './public/assets/css', js: './public/assets/js' };
 
 // Set terser options
-let terser_options = { output: { comments: /^!/ } },
+let terser_options = { output: { comments: false } },
     sass_options = { sourceComments: 'map', errLogToConsole: true, outputStyle: 'expanded', precision: 10 };
 
 /**
@@ -38,6 +41,17 @@ function watchFiles() {
 // JavaScript assets
 gulp.task( 'taskJS', (done) => {
 
+    gulp.src([
+            './node_modules/jquery/dist/jquery.min.js',
+            './node_modules/sprintf-js/dist/sprintf.min.js',
+            './node_modules/socket.io-client/dist/socket.io.slim.js',
+            `${src.vendor}/noist.min.js`
+        ])
+        .on( 'error', console.error.bind( console ) )
+        .pipe( terser( terser_options ) )
+        .pipe( concat( 'vendor.min.js' ) )
+        .pipe( gulp.dest( dest.js ) );
+
     gulp.src( `${src.js}/main.js` )
         .on( 'error', console.error.bind( console ) )
         .pipe( concat( 'main.js' ) )
@@ -51,6 +65,15 @@ gulp.task( 'taskJS', (done) => {
 
 // CSS & SASS assets
 gulp.task( 'taskCSS', (done) => {
+
+    gulp.src([
+            `${src.vendor}/noist.min.css`,
+            `${src.vendor}/basecss.min.css`
+        ])
+        .on( 'error', console.error.bind( console ) )
+        .pipe( csso( { comments: false } ) )
+        .pipe( concat( 'vendor.min.css' ) )
+        .pipe( gulp.dest( dest.css ) );
 
     gulp.src( `${src.sass}/style.scss` )
         .on( 'error', console.error.bind( console ) )

@@ -25,12 +25,18 @@
     "socket.io-client": "^2.1.1"
   },
   "devDependencies": {
+    "basecss": "^0.3.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0",
     "gulp-concat": "^2.6.1",
+    "gulp-csso": "^4.0.1",
     "gulp-line-ending-corrector": "^1.0.3",
     "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
-    "nodemon": "^2.0.1"
+    "gulp-terser": "^1.2.0",
+    "jquery": "^3.4.1",
+    "nodemon": "^2.0.1",
+    "sprintf-js": "^1.1.2"
   }
 }

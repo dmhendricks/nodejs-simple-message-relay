@@ -21,7 +21,8 @@ A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https:/
 - [ ] Add ability to limit specific socket names
 - [x] Add connect/disconnect state to demo page
 - [x] Add field to demo page to submit message
-- [ ] Improve browser example
+- [x] Add Growl-style example
+- [ ] Add example with custom template and image
 - [ ] Input validation
 - [ ] Exception handling
 
@@ -76,12 +77,17 @@ Once the server is running:
 curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-    "message": "Hello world!"
+    "message": "Hello world!",
+    "color": "info"
 }'
 ```
 
 After sending one or more messages, they should appear on the browser demo page. See [`public/index.html`](https://github.com/dmhendricks/nodejs-simple-message-relay/blob/master/public/index.html) for source code.
 
 **Note:** The `api_key` query string variable may be absent in [development](#setting-environments) mode (ie, when `NODE_ENV` is not defined).
+
+## Screenshot
+
+![Screenshot](https://raw.githubusercontent.com/dmhendricks/nodejs-simple-message-relay/master/public/assets/images/screenshot.gif)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-126205765-1/dmhendricks/nodejs-simple-message-relay?flat)](https://ga-beacon.appspot.com/?utm_source=github.com&utm_medium=campaign&utm_content=button&utm_campaign=dmhendricks%2Fnodejs-simple-message-relay)

@@ -45,10 +45,19 @@ p.message {
     }
 }
 
+table {
+    width: 100%;
+
+    td:first-child {
+        text-align: right;
+        font-weight: 500;
+        width: 100px;
+    }
+}
 input {
 
-    width: 400px;
-    max-width: 50%;
+    width: 50%;
+    max-width: 400px;
 
     &.empty {
         border: 1px solid #E87575;

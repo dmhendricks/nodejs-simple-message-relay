@@ -6,58 +6,58 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
 (function($) {
 
     var socket_name = 'my-socket-name';
-    var msg = $( '#messages' ), status = $( '#status' ), submit_buttom = $( 'button.submit' ), message_to_send = $( '#message_to_send' );
+    var status = $( '#status' ), submit_button = $( 'button.submit' ), simple_notification = $( '#simple_notification' ), simple_notification_color = $( '#simple_notification_color' );
+    var notify = $.noist( { position: 'bottom left' } );
 
     // Set connection state
     socket.on( 'connect', function() {
 
         status.attr( 'data-connected', true ).html( 'Connected' );
-        submit_buttom.removeAttr( 'disabled' );
-        message_to_send.removeAttr( 'disabled' );
+        submit_button.removeAttr( 'disabled' );
+        $( 'input, select' ).removeAttr( 'disabled' );
         console.info( 'Connected: ' + socket_name );
 
     }).on( 'disconnect', function( reason ) {
 
         status.removeAttr( 'data-connected' ).html( 'Disconnected' );
-        submit_buttom.attr( 'disabled', 'disabled' );
-        message_to_send.attr( 'disabled', 'disabled' );
+        submit_button.attr( 'disabled', 'disabled' );
+        $( 'input, select' ).attr( 'disabled', 'disabled' );
         console.info( 'Connected: ' + socket_name );
 
     });
 
     // Listen for messages from Socket.IO
-    socket.on( socket_name, function( payload ) {
+    socket.on( socket_name, function( response ) {
 
-        console.log( `Recevied [${socket_name}]`, payload );
+        console.log( `Recevied [${socket_name}]`, response );
 
-        // Remove "Waiting..." element, if present
-        $( '#waiting' ).remove();
+        // Display notification
+        notify.message( response.content, response.color );
 
-        // Append incoming messages to element
-        msg.append( '<p class="message">' + payload.content + '</p>' );
     });
 
     // Send button event handler
-    submit_buttom.on( 'click', function( event ) {
+    submit_button.on( 'click', function( event ) {
 
         event.preventDefault();
-        if( !message_to_send.val().trim() ) {
-            message_to_send.addClass( 'empty' );
+        if( !$( 'input' ).val().trim() ) {
+            $( 'input' ).addClass( 'empty' );
             return;
         }
-        message_to_send.removeClass( 'empty' );
+        simple_notification.removeClass( 'empty' );
 
         // Send message to Socket.IO
         jQuery.ajax ({
             url: url + '/send/' + socket_name,
             type: 'POST',
             data: JSON.stringify({
-                content: message_to_send.val()
+                content: simple_notification.val(),
+                color: simple_notification_color.val()
             }),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function( response ){
-                message_to_send.val( '' );
+                simple_notification.val( '' );
                 console.log( 'Message sent: ', response );
             }
         });
