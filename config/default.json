@@ -1,0 +1,10 @@
+{
+    "server": {
+        "port": 3000,
+        "address": "localhost"
+    },
+    "cors": {
+        "origins": [ "*" ]
+    },
+    "api_keys": []
+}

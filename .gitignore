@@ -1,0 +1,15 @@
+*~
+__MACOSX
+.DS_Store
+Thumbs.db
+*.bak
+*.log
+*.swp
+
+# Configuration Files
+config/*
+!config/default.json
+
+# Development - General
+/node_modules/
+package-lock.json

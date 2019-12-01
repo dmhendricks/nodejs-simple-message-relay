@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-simple-message-relay",
+  "version": "0.1.0",
+  "description": "A simple Node.js server to relay messages to Socket.IO clients",
+  "license": "Apache-2.0",
+  "keywords": [ "socketio", "message", "relay", "nodejs" ],
+  "author": "Daniel M. Hendricks",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "config": "^3.2.4",
+    "restify": "^8.4.0",
+    "restify-cors-middleware": "^1.1.1",
+    "restify-errors": "^8.0.1",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
