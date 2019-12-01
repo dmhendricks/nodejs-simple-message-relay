@@ -57,7 +57,7 @@ npm run start
 
 Once the server is running:
 
-1. Visit [http://localhost:3000/](http://localhost:3000/) in your web browser to bring up the client-side browser demo (disabled if `demo_page` is false in [config](#configuration)).
+1. Visit [http://localhost:3000/](http://localhost:3000/) in your web browser to bring up the client-side browser demo (disabled if `demo_page` is false in [config](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Configuration)).
 2. Use [Postman](https://www.getpostman.com/) or cURL to send a POST to the `/send` endpoint:
 
 ```bash
@@ -71,7 +71,7 @@ curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
 
 After sending one or more messages, they should appear on the browser demo page. See [`public/index.html`](https://github.com/dmhendricks/nodejs-simple-message-relay/blob/master/public/index.html) for source code.
 
-**Note:** The `api_key` query string variable may be absent in [development](#setting-environments) mode (ie, when `NODE_ENV` is not defined).
+**Note:** The `api_key` query string variable may be absent in [development](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Configuration#setting-environment) mode (ie, when `NODE_ENV` is not defined).
 
 ## Screenshot
 
