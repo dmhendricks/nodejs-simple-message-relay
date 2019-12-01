@@ -26,6 +26,7 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 - [ ] Add example with custom template and image
 - [ ] Input validation
 - [ ] Exception handling
+- [ ] WordPress plugin
 
 ## Installation
 
@@ -78,7 +79,7 @@ Once the server is running:
 curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-    "content": "Hello world!",
+    "message": "Hello world!",
     "color": "info"
 }'
 ```

@@ -33,7 +33,7 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
         console.log( `Recevied [${socket_name}]`, response );
 
         // Display notification
-        notify.message( response.content, response.color );
+        notify.message( response.message, response.color );
 
     });
 
@@ -52,7 +52,7 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
             url: url + '/send/' + socket_name,
             type: 'POST',
             data: JSON.stringify({
-                content: simple_notification.val(),
+                message: simple_notification.val(),
                 color: simple_notification_color.val()
             }),
             dataType: "json",
