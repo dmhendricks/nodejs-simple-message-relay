@@ -6,7 +6,7 @@
 
 # Node.js Simple Message Relay
 
-A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https://socket.io/) to relay messages to browser clients.
+A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https://socket.io/) to relay messages to Socket.IO clients.
 
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -18,9 +18,12 @@ A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https:/
 
 ### TODO
 
-- Add ability to limit to specific socket names
-- Input validation
-- Exception handling
+- [ ] Add ability to limit to specific socket names
+- [x] Add connect/disconnect state to demo page
+- [ ] Add field to demo page to submit message
+- [ ] Improve browser example
+- [ ] Input validation
+- [ ] Exception handling
 
 ## Installation
 
@@ -66,7 +69,7 @@ If you'd like to have a different [configuration file](https://github.com/lorenw
 
 Once the server is running:
 
-1. Visit [http://localhost:3000/](http://localhost:3000/) in your web browser to bring up the client-side browser demo.
+1. Visit [http://localhost:3000/](http://localhost:3000/) in your web browser to bring up the client-side browser demo (disabled if `demo_page` is false in [config](#configuration)).
 2. Use [Postman](https://www.getpostman.com/) or cURL to send a POST to the `/send` endpoint:
 
 ```bash

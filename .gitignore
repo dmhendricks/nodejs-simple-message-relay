@@ -11,5 +11,6 @@ config/*
 !config/default.json
 
 # Development - General
-/node_modules/
+node_modules/
+public/src/vendor/
 package-lock.json
