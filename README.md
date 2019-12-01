@@ -9,13 +9,26 @@
 A simple example of using [Node.js](https://nodejs.org/) to send Growl-style messages to a browser via [Socket.IO](https://socket.io/).
 
 - [Installation](#installation)
-- [Configuration](#configuration)
+- [Configuration](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Configuration)
+	- [Setting Environment](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Configuration#setting-environment)
 - [Usage](#usage)
 - [Screenshot](#screenshot)
 
 ### Requirements
 
 - [Node.js](https://nodejs.org/)
+
+### How It Works
+
+**The server does one thing:** It accepts JSON data submitted to the endpoint and forwards it to the specified socket. It will relay _any_ data that you submit - it is up to the listening client to consume it.
+
+You can have any number of clients listening to different sockets. In this way, you can have multiple apps listening for different events and different payloads. Purely as examples, you could have all of the following:
+
+- An admin panel that listens on a socket named `admin-notifications`, receiving information about system events.
+- An e-commerce site that listens on a socket named `sales-popups`, which displays a sale notification to visitors, similar to [Sales Pop](http://sales-pop.demo.beeketing.com/).
+- A real-time chat application that listens on a socket named `chat-app`, which broadcasts user messages as they are submitted.
+
+These are just examples - you can relay any data to any number of sockets that you wish. **The included demo page is simply an example of consuming data received from the server.** Your usage will vary.
 
 ### Goals
 
@@ -26,7 +39,7 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 - [ ] Add example with custom template and image
 - [ ] Improve input validation
 - [ ] Improve exception handling
-- [ ] WordPress plugin to function similar to [Sales Pop](http://sales-pop.demo.beeketing.com/)
+- [ ] WordPress plugin and integrations
 
 ## Installation
 
@@ -39,37 +52,6 @@ npm install
 npm run start
 ```
 :pushpin: For local development, you can use `npm run dev` instead to automatically reload the server as you modify and save files.
-
-## Configuration
-
-Configuration files are located in the `config` directory. `default.json` is used when `NODE_ENV` is not defined or where a matching environment configuration file does not exist.
-
-### Setting Environment
-
-If you'd like to have a different [configuration file](https://github.com/lorenwest/node-config/wiki/Configuration-Files#file-load-order/) a particular environment ("production", for example):
-
-1. Set the environment at the command line: `export NODE_ENV=production`
-2. Create a `config/production.json` file with variables from [`config/default.json`](https://github.com/dmhendricks/nodejs-simple-message-relay/blob/master/config/default.json) that you'd like to override. Example:
-
-```json
-{
-    "server": {
-        "address": "0.0.0.0"
-    },
-    "demo_page": false,
-    "api_keys": [
-        "abc123def",
-        "tuv456xyz"
-    ],
-    "sockets": [
-        "my-socket-name"
-    ]
-}
-```
-
-:warning: If `api_keys` is an empty array, validation will not occur and **_all message_** will be accepted (useful for local development and debugging, not recommended when publicly accessible).
-
-:pushpin: See [restify-cors-middleware](https://github.com/Tabcorp/restify-cors-middleware#usage) for CORS configuration options.
 
 ## Usage
 

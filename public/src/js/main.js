@@ -5,12 +5,12 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
 
 (function($) {
 
-    var socket_name = 'my-socket-name';
+    var socket_name = 'my-socket-name'; // Name as you wish
     var status = $( '#status' ), submit_button = $( 'button.submit' ), simple_notification = $( '#simple_notification' ), simple_notification_color = $( '#simple_notification_color' );
     var notify = $.noist( { position: 'bottom left' } );
     notify.options.duration = 1500;
 
-    // Set connection state
+    // Display connection state
     socket.on( 'connect', function() {
 
         status.attr( 'data-connected', true ).html( 'Connected' );
@@ -32,7 +32,8 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
 
         console.log( `Recevied [${socket_name}]`, response );
 
-        // Display notification
+        // Display notification - For this example, I am displaying a slide-out message on the demo page.
+        // You can consume the response data as you desire and for your own needs.
         notify.message( response.message, response.color );
 
     });
@@ -41,13 +42,15 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
     submit_button.on( 'click', function( event ) {
 
         event.preventDefault();
+
+        // Disallow submitting empty messages
         if( !$( 'input' ).val().trim() ) {
             $( 'input' ).addClass( 'empty' );
             return;
         }
         simple_notification.removeClass( 'empty' );
 
-        // Send message to Socket.IO
+        // Send message to Socket.IO endpoint
         jQuery.ajax ({
             url: url + '/send/' + socket_name,
             type: 'POST',
@@ -58,8 +61,10 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function( response ){
+
                 simple_notification.val( '' );
                 console.log( 'Message sent: ', response );
+
             }
         });
 
