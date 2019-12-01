@@ -24,8 +24,8 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 - [x] Add field to demo page to submit message
 - [x] Add Growl-style example
 - [ ] Add example with custom template and image
-- [ ] Input validation
-- [ ] Exception handling
+- [ ] Improve input validation
+- [ ] Improve exception handling
 - [ ] WordPress plugin
 
 ## Installation

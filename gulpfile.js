@@ -45,7 +45,7 @@ gulp.task( 'taskJS', (done) => {
             './node_modules/jquery/dist/jquery.min.js',
             './node_modules/sprintf-js/dist/sprintf.min.js',
             './node_modules/socket.io-client/dist/socket.io.slim.js',
-            `${src.vendor}/noist.min.js`
+            `${src.vendor}/notify.min.js`
         ])
         .on( 'error', console.error.bind( console ) )
         .pipe( terser( terser_options ) )
@@ -67,7 +67,7 @@ gulp.task( 'taskJS', (done) => {
 gulp.task( 'taskCSS', (done) => {
 
     gulp.src([
-            `${src.vendor}/noist.min.css`,
+            `${src.vendor}/notify.min.css`,
             `${src.vendor}/basecss.min.css`
         ])
         .on( 'error', console.error.bind( console ) )
