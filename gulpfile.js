@@ -1,6 +1,7 @@
 /**
  * Gulpfile for Node.js Simple Message Relay
  *    Usage: npx gulp
+ *           npx gulp [task_name]
  */
 
 let pkg = require( './package.json' ),
@@ -32,7 +33,7 @@ const BROWSERS_LIST = [ 'last 2 version', '> 1%', 'ie >= 11', 'last 2 Android ve
  * Gulp Tasks
  */
 
-// Watch files
+// Watch files for changes
 function watchFiles() {
   gulp.watch( `${src.js}/**/*.js`, gulp.series( 'taskJS' ) );
   gulp.watch( `${src.sass}/**/*.scss`, gulp.series( 'taskCSS' ) );
