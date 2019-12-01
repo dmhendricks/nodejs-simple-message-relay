@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Simple Message Relay Demo</title>
+    <meta name="description" content="NodePop - Demo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basscss/css/basscss.min.css" />
+
+    <style>
+        body { font-family: Verdana, Geneva, sans-serif; margin: 2em; }
+        a { color: #1155CC; }
+        a:hover { color: #0C419E; }
+        hr { background-color: #ccc; height: 1px; border: none; }
+        #waiting { color: #777; font-style: italic; }
+        p.message { color: #0c5460; background-color: #d1ecf1; border: 1px solid #bee5eb; padding: 0.5em 0.7em; }
+    </style>
+
+</head>
+<body>
+
+    <main id="content">
+
+        <h2>Simple Message Relay - Browser Demo</h2>
+        <p>See the <a href="https://github.com/dmhendricks/nodejs-simple-message-relay/#usage" target="_blank">GitHub project page</a> for usage instructions.</p>
+
+        <hr />
+
+        <h4>Messages Received:</h4>
+        <div id="waiting">Waiting...</div>
+        <div id="messages"></div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.slim.js"></script>
+
+    <script>
+
+        const socket = io.connect( 'http://127.0.0.1:3000' );
+
+        (function($) {
+
+            var msg = $( '#messages' );
+
+            socket.on( 'my-socket-name', function( payload ) {
+
+                // Remove "Waiting..." element, if present
+                $( '#waiting' ).remove();
+
+                // Append incoming messages to element
+                msg.append( '<p class="message">' + payload.content + '</p>' );
+            });
+
+        })( window.jQuery );
+
+    </script>
+
+</body>
+</html>
