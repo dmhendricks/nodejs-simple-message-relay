@@ -19,7 +19,7 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 
 ### TODO
 
-- [ ] Add ability to limit specific socket names
+- [x] Add ability to limit specific socket names
 - [x] Add connect/disconnect state to demo page
 - [x] Add field to demo page to submit message
 - [x] Add Growl-style example
@@ -60,6 +60,9 @@ If you'd like to have a different [configuration file](https://github.com/lorenw
     "api_keys": [
         "abc123def",
         "tuv456xyz"
+    ],
+    "sockets": [
+        "my-socket-name"
     ]
 }
 ```

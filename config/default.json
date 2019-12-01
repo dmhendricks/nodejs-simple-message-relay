@@ -7,5 +7,6 @@
         "origins": [ "*" ]
     },
     "demo_page": true,
-    "api_keys": []
+    "api_keys": [],
+    "sockets": []
 }

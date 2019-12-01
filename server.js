@@ -36,6 +36,8 @@ server.post( '/send/:socket', function( req, res, next ) {
 
     if( config.get( 'api_keys' ).length && ( typeof req.query.api_key === 'undefined' || !config.get( 'api_keys' ).includes( req.query.api_key ) ) ) {
         next( new errors.BadRequestError( 'Invalid API key' ) );
+    } else if( config.get( 'sockets' ).length && !config.get( 'sockets' ).includes( req.params.socket ) ) {
+        next( new errors.BadRequestError( 'Invalid socket name' ) );
     } else {
         io.emit( req.params.socket, req.body );
         res.send( req.body );
