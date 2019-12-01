@@ -17,7 +17,7 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 
 - [Node.js](https://nodejs.org/)
 
-### TODO
+### Goals
 
 - [x] Add ability to limit specific socket names
 - [x] Add connect/disconnect state to demo page
@@ -26,7 +26,7 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 - [ ] Add example with custom template and image
 - [ ] Improve input validation
 - [ ] Improve exception handling
-- [ ] WordPress plugin
+- [ ] WordPress plugin to function similar to [Sales Pop](http://sales-pop.demo.beeketing.com/)
 
 ## Installation
 
