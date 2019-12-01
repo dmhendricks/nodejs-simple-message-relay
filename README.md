@@ -42,7 +42,7 @@ Configuration files are located in the `config` directory.
 If you'd like to have a different [configuration file](https://github.com/lorenwest/node-config/wiki/Configuration-Files#file-load-order/) a particular environment ("production", for example):
 
 1. Set the environment at the command line: `export NODE_ENV=production`
-2. Create a `config/production.json` file with modified variables from `config/default.json`. Example:
+2. Create a `config/production.json` file with variables from [`config/default.json`](https://github.com/dmhendricks/nodejs-simple-message-relay/blob/master/config/default.json) that you'd like to override. Example:
 
 ```json
 {
