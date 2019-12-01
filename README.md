@@ -18,9 +18,9 @@ A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https:/
 
 ### TODO
 
-- [ ] Add ability to limit to specific socket names
+- [ ] Add ability to limit specific socket names
 - [x] Add connect/disconnect state to demo page
-- [ ] Add field to demo page to submit message
+- [x] Add field to demo page to submit message
 - [ ] Improve browser example
 - [ ] Input validation
 - [ ] Exception handling
