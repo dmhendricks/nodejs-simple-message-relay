@@ -1,0 +1,57 @@
+/*! Node.js Simple Message Relay */
+
+body {
+    font-family: Verdana, Geneva, sans-serif;
+    margin: 2em;
+}
+
+a {
+    color: #1155CC;
+
+    &:hover {
+        color: #0C419E;
+    }
+}
+
+hr {
+    background-color: #ccc;
+    height: 1px;
+    border: none;
+}
+
+#waiting {
+    color: #777;
+    font-style: italic;
+}
+
+p.message {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    padding: 0.5em 0.7em;
+}
+
+#status {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 0.1em 0.3em;
+    font-size: 0.95em;
+
+    &[data-connected="true"] {
+        color: #155724;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+    }
+}
+
+input {
+
+    width: 400px;
+    max-width: 50%;
+
+    &.empty {
+        border: 1px solid #E87575;
+    }
+
+}

@@ -1,0 +1,64 @@
+/*! Node.js Simple Message Relay */
+/* line 3, public/src/scss/style.scss */
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  margin: 2em;
+}
+
+/* line 8, public/src/scss/style.scss */
+a {
+  color: #1155CC;
+}
+
+/* line 11, public/src/scss/style.scss */
+a:hover {
+  color: #0C419E;
+}
+
+/* line 16, public/src/scss/style.scss */
+hr {
+  background-color: #ccc;
+  height: 1px;
+  border: none;
+}
+
+/* line 22, public/src/scss/style.scss */
+#waiting {
+  color: #777;
+  font-style: italic;
+}
+
+/* line 27, public/src/scss/style.scss */
+p.message {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+  padding: 0.5em 0.7em;
+}
+
+/* line 34, public/src/scss/style.scss */
+#status {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.1em 0.3em;
+  font-size: 0.95em;
+}
+
+/* line 41, public/src/scss/style.scss */
+#status[data-connected="true"] {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+/* line 48, public/src/scss/style.scss */
+input {
+  width: 400px;
+  max-width: 50%;
+}
+
+/* line 53, public/src/scss/style.scss */
+input.empty {
+  border: 1px solid #E87575;
+}
