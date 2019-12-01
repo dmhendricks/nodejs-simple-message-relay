@@ -12,6 +12,7 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 - [Configuration](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Configuration)
 	- [Setting Environment](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Configuration#setting-environment)
 - [Usage](#usage)
+	- [Client-Side Example Code](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Client-Side-Example-Code)
 - [Screenshot](#screenshot)
 
 ### Requirements
@@ -32,9 +33,6 @@ These are just examples - you can relay any data to any number of sockets that y
 
 ### Goals
 
-- [x] Add ability to limit specific socket names
-- [x] Add connect/disconnect state to demo page
-- [x] Add field to demo page to submit message
 - [x] Add Growl-style example
 - [ ] Add example with custom template and image
 - [ ] Improve input validation
