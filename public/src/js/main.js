@@ -8,6 +8,7 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
     var socket_name = 'my-socket-name';
     var status = $( '#status' ), submit_button = $( 'button.submit' ), simple_notification = $( '#simple_notification' ), simple_notification_color = $( '#simple_notification_color' );
     var notify = $.noist( { position: 'bottom left' } );
+    notify.options.duration = 1500;
 
     // Set connection state
     socket.on( 'connect', function() {
