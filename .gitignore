@@ -12,5 +12,5 @@ config/*
 
 # Development - General
 node_modules/
-public/src/vendor/
+public/src/vendor/noist/
 package-lock.json

@@ -7,8 +7,7 @@
     <meta name="description" content="Simple Message Relay Demo" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basscss/css/basscss.min.css" />
+    <link rel="stylesheet" href="assets/css/vendor.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
 
 </head>
@@ -22,15 +21,34 @@
 
         <hr />
 
-        <p>Send message: <input id="message_to_send" name="message_to_send" type="text" disabled /> <button class="submit" disabled >Send</button></p>
-
-        <h4>Messages Received:</h4>
-        <div id="waiting">Waiting...</div>
-        <div id="messages"></div>
+        <h4>Send Simple Notification</h4>
+        <table>
+            <tr>
+                <td>Message:</td>
+                <td><input id="simple_notification" type="text" disabled /></td>
+            </tr>
+            <tr>
+                <td>Color:</td>
+                <td>
+                    <select id="simple_notification_color" disabled>
+                        <option value="">Default</option>
+                        <option value="white">White</option>
+                        <option value="success">Success</option>
+                        <option value="info">Info</option>
+                        <option value="warning">Warning</option>
+                        <option value="error">Error</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td />
+                <td><button class="submit" disabled >Send</button></td>
+            </tr>
+        </table>
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/combine/npm/jquery@2/dist/jquery.min.js,npm/socket.io-client@2.3/dist/socket.io.slim.min.js"></script>
+    <script src="assets/js/vendor.min.js"></script>
     <script src="assets/js/main.js"></script>
 
 </body>

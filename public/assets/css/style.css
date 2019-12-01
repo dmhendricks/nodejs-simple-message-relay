@@ -53,12 +53,24 @@ p.message {
 }
 
 /* line 48, public/src/scss/style.scss */
-input {
-  width: 400px;
-  max-width: 50%;
+table {
+  width: 100%;
 }
 
-/* line 53, public/src/scss/style.scss */
+/* line 51, public/src/scss/style.scss */
+table td:first-child {
+  text-align: right;
+  font-weight: 500;
+  width: 100px;
+}
+
+/* line 57, public/src/scss/style.scss */
+input {
+  width: 50%;
+  max-width: 400px;
+}
+
+/* line 62, public/src/scss/style.scss */
 input.empty {
   border: 1px solid #E87575;
 }
