@@ -17,6 +17,8 @@
         hr { background-color: #ccc; height: 1px; border: none; }
         #waiting { color: #777; font-style: italic; }
         p.message { color: #0c5460; background-color: #d1ecf1; border: 1px solid #bee5eb; padding: 0.5em 0.7em; }
+        #status { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 0.1em 0.3em; font-size: 0.95em; }
+        #status[data-connected="true"] { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; }
     </style>
 
 </head>
@@ -26,6 +28,7 @@
 
         <h2>Simple Message Relay - Browser Demo</h2>
         <p>See the <a href="https://github.com/dmhendricks/nodejs-simple-message-relay/#usage" target="_blank">GitHub project page</a> for usage instructions.</p>
+        <p>Socket.IO state: <span id="status" class="disconnected">Disconnected</span></p>
 
         <hr />
 
@@ -40,13 +43,27 @@
 
     <script>
 
-        const socket = io.connect( 'http://127.0.0.1:3000' );
+        const socket = io.connect( 'http://127.0.0.1:3000', { reconnection: true } ); // Set reconnection to false to disable automatic reconnection
 
         (function($) {
 
             var socket_name = 'my-socket-name';
-            var msg = $( '#messages' );
+            var msg = $( '#messages' ), status = $( '#status' );
 
+            // Set connection state
+            socket.on( 'connect', function() {
+
+                status.attr( 'data-connected', true ).html( 'Connected' );
+                console.info( 'Connected: ' + socket_name );
+
+            }).on( 'disconnect', function( reason ) {
+
+                status.removeAttr( 'data-connected' ).html( 'Disconnected' );
+                console.info( 'Connected: ' + socket_name );
+
+            });
+
+            // Listen for messages from Socket.IO
             socket.on( 'my-socket-name', function( payload ) {
 
                 console.log( socket_name, payload );
