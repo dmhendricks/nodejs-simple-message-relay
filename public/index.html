@@ -4,24 +4,12 @@
 
     <meta charset="utf-8" />
     <title>Simple Message Relay Demo</title>
-    <meta name="description" content="NodePop - Demo" />
+    <meta name="description" content="Simple Message Relay Demo" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basscss/css/basscss.min.css" />
-
-    <style>
-        body { font-family: Verdana, Geneva, sans-serif; margin: 2em; }
-        a { color: #1155CC; }
-        a:hover { color: #0C419E; }
-        hr { background-color: #ccc; height: 1px; border: none; }
-        #waiting { color: #777; font-style: italic; }
-        p.message { color: #0c5460; background-color: #d1ecf1; border: 1px solid #bee5eb; padding: 0.5em 0.7em; }
-        #status { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 0.1em 0.3em; font-size: 0.95em; }
-        #status[data-connected="true"] { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; }
-        input { width: 400px; max-width: 50%; }
-        input.empty { border: 1px solid #E87575; }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css" />
 
 </head>
 <body>
@@ -42,77 +30,8 @@
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/combine/npm/jquery@2/dist/jquery.min.js,npm/socket.io-client@2.3/dist/socket.io.slim.min.js,npm/sprintf-js@1.1/src/sprintf.min.js"></script>
-
-    <script>
-
-        const url = 'http://127.0.0.1:3000';
-        const socket = io.connect( url, { reconnection: true } ); // Set reconnection to false to disable automatic reconnection
-
-        (function($) {
-
-            var socket_name = 'my-socket-name';
-            var msg = $( '#messages' ), status = $( '#status' ), submit_buttom = $( 'button.submit' ), message_to_send = $( '#message_to_send' );
-
-            // Set connection state
-            socket.on( 'connect', function() {
-
-                status.attr( 'data-connected', true ).html( 'Connected' );
-                submit_buttom.removeAttr( 'disabled' );
-                message_to_send.removeAttr( 'disabled' );
-                console.info( 'Connected: ' + socket_name );
-
-            }).on( 'disconnect', function( reason ) {
-
-                status.removeAttr( 'data-connected' ).html( 'Disconnected' );
-                submit_buttom.attr( 'disabled', 'disabled' );
-                message_to_send.attr( 'disabled', 'disabled' );
-                console.info( 'Connected: ' + socket_name );
-
-            });
-
-            // Listen for messages from Socket.IO
-            socket.on( 'my-socket-name', function( payload ) {
-
-                console.log( socket_name, payload );
-
-                // Remove "Waiting..." element, if present
-                $( '#waiting' ).remove();
-
-                // Append incoming messages to element
-                msg.append( '<p class="message">' + payload.content + '</p>' );
-            });
-
-            // Send button event handler
-            submit_buttom.on( 'click', function( event ) {
-
-                event.preventDefault();
-                if( !message_to_send.val().trim() ) {
-                    message_to_send.addClass( 'empty' );
-                    return;
-                }
-                message_to_send.removeClass( 'empty' );
-
-                // Send message to Socket.IO
-                jQuery.ajax ({
-                    url: url + '/send/' + socket_name,
-                    type: 'POST',
-                    data: JSON.stringify({
-                        content: message_to_send.val()
-                    }),
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function( response ){
-                        message_to_send.val( '' );
-                        console.log( 'Message sent: ', response );
-                    }
-                });
-
-            });
-
-        })( window.jQuery );
-
-    </script>
+    <script src="https://cdn.jsdelivr.net/combine/npm/jquery@2/dist/jquery.min.js,npm/socket.io-client@2.3/dist/socket.io.slim.min.js"></script>
+    <script src="assets/js/main.js"></script>
 
 </body>
 </html>

@@ -24,7 +24,7 @@ server.use( cors.actual );
 // Serve static files under ./public
 if( config.get( 'demo_page' ) ) {
 
-    server.get( '/', restify.plugins.serveStatic({
+    server.get( '/*', restify.plugins.serveStatic({
         directory: __dirname + '/public',
         default: 'index.html',
     }));
