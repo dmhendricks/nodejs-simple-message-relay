@@ -21,13 +21,11 @@ server.use( restify.plugins.bodyParser() );
 server.pre( cors.preflight );
 server.use( cors.actual );
 
-// TODO: Serve static files under ./public
-/*
+// Serve static files under ./public
 server.get( '/', restify.plugins.serveStatic({
     directory: __dirname + '/public',
     default: 'index.html',
 }));
-*/
 
 // Relay messages to connected clients
 server.post( '/send/:socket', function( req, res, next ) {

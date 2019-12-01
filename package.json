@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "description": "A simple Node.js server to relay messages to Socket.IO clients",
   "license": "Apache-2.0",
-  "keywords": [ "socketio", "message", "relay", "nodejs" ],
+  "keywords": [
+    "socket.io",
+    "message",
+    "relay",
+    "nodejs"
+  ],
   "author": "Daniel M. Hendricks",
   "private": true,
   "main": "server.js",

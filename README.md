@@ -6,20 +6,20 @@
 
 # Node.js Simple Message Relay
 
-A simple Node.js server to relay messages to Socket.IO clients.
+A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https://socket.io/) to relay messages to browser clients.
 
-:rotating_light: **This is a work-in-progress**
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
 
-## Requirements
+### Requirements
 
 - [Node.js](https://nodejs.org/)
 
-## TODO
+### TODO
 
-- Add a _complete_ [client-side example](#client-side-usage-example)
-- Add ability to limit socket names
+- Add ability to limit to specific socket names
 - Exception handling
-- Cleanup and refactor
 
 ## Installation
 
@@ -35,9 +35,9 @@ npm run start
 
 ## Configuration
 
-Configuration files are located in the `config` directory.
+Configuration files are located in the `config` directory. `default.json` is used when `NODE_ENV` is not defined or where a matching environment configuration file does not exist.
 
-### Setting Environments
+### Setting Environment
 
 If you'd like to have a different [configuration file](https://github.com/lorenwest/node-config/wiki/Configuration-Files#file-load-order/) a particular environment ("production", for example):
 
@@ -56,36 +56,27 @@ If you'd like to have a different [configuration file](https://github.com/lorenw
 }
 ```
 
-:warning: If `api_keys` is an empty array, validation will not occur and all messages will be accepted (useful for local development, not recommended when publicly accessible).
+:warning: If `api_keys` is an empty array, validation will not occur and **_all message_** will be accepted (useful for local development and debugging, not recommended when publicly accessible).
 
 :pushpin: See [restify-cors-middleware](https://github.com/Tabcorp/restify-cors-middleware#usage) for CORS configuration options.
 
-## Client-Side Usage Example
+## Usage
 
-Below is a basic example of listening for Socket.IO on the client side (browser):
+Once the server is running:
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/socket.io-client/dist/socket.io.slim.js"></script>
-
-<h3>nodejs-simple-message-relay Demo</h3>
-<div id="messages"></div>
-```
-
-```js
-var socket = io.connect( 'http://127.0.0.1:3000' );
-
-var messageElement = document.getElementById( 'messages' );
-socket.on( 'my-socket-name', payload => messageElement.innerText += payload.message + '<br />' );
-```
-
-From there, you can send messages using [Postman](https://www.getpostman.com/) or cURL to POST to the `/send` endpoint:
+1. Visit [http://localhost:3000/](http://localhost:3000/) in your web browser to bring up the client-side browser demo.
+2. Use [Postman](https://www.getpostman.com/) or cURL to send a POST to the `/send` endpoint:
 
 ```bash
-curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=abc123def' \
+curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
     "message": "Hello world!"
 }'
 ```
+
+After sending one or more messages, they should appear on the browser demo page. See [`public/index.html`](https://github.com/dmhendricks/nodejs-simple-message-relay/blob/master/public/index.html) for source code.
+
+**Note:** The `api_key` query string variable may be absent in [development](#setting-environments) mode (ie, when `NODE_ENV` is not defined).
 
 [![Analytics](https://ga-beacon.appspot.com/UA-126205765-1/dmhendricks/nodejs-simple-message-relay?flat)](https://ga-beacon.appspot.com/?utm_source=github.com&utm_medium=campaign&utm_content=button&utm_campaign=dmhendricks%2Fnodejs-simple-message-relay)
