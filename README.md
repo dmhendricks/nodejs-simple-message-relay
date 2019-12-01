@@ -78,7 +78,7 @@ Once the server is running:
 curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-    "message": "Hello world!",
+    "content": "Hello world!",
     "color": "info"
 }'
 ```
