@@ -44,9 +44,12 @@
 
         (function($) {
 
+            var socket_name = 'my-socket-name';
             var msg = $( '#messages' );
 
             socket.on( 'my-socket-name', function( payload ) {
+
+                console.log( socket_name, payload );
 
                 // Remove "Waiting..." element, if present
                 $( '#waiting' ).remove();

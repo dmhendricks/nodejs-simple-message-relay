@@ -22,10 +22,14 @@ server.pre( cors.preflight );
 server.use( cors.actual );
 
 // Serve static files under ./public
-server.get( '/', restify.plugins.serveStatic({
-    directory: __dirname + '/public',
-    default: 'index.html',
-}));
+if( config.get( 'demo_page' ) ) {
+
+    server.get( '/', restify.plugins.serveStatic({
+        directory: __dirname + '/public',
+        default: 'index.html',
+    }));
+
+}
 
 // Relay messages to connected clients
 server.post( '/send/:socket', function( req, res, next ) {

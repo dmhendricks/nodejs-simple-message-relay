@@ -19,6 +19,7 @@ A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https:/
 ### TODO
 
 - Add ability to limit to specific socket names
+- Input validation
 - Exception handling
 
 ## Installation
@@ -49,6 +50,7 @@ If you'd like to have a different [configuration file](https://github.com/lorenw
     "server": {
         "address": "0.0.0.0"
     },
+    "demo_page": false,
     "api_keys": [
         "abc123def",
         "tuv456xyz"
