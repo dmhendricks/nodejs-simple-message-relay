@@ -6,11 +6,12 @@
 
 # Node.js Simple Message Relay
 
-A simple example of using [Node.js](https://nodejs.org/) and [Socket.IO](https://socket.io/) to relay messages to Socket.IO clients.
+A simple example of using [Node.js](https://nodejs.org/) to send Growl-style messages to a browser via [Socket.IO](https://socket.io/).
 
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
+- [Screenshot](#screenshot)
 
 ### Requirements
 
