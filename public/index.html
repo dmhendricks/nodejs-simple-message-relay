@@ -19,6 +19,8 @@
         p.message { color: #0c5460; background-color: #d1ecf1; border: 1px solid #bee5eb; padding: 0.5em 0.7em; }
         #status { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 0.1em 0.3em; font-size: 0.95em; }
         #status[data-connected="true"] { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; }
+        input { width: 400px; max-width: 50%; }
+        input.empty { border: 1px solid #E87575; }
     </style>
 
 </head>
@@ -32,33 +34,39 @@
 
         <hr />
 
+        <p>Send message: <input id="message_to_send" name="message_to_send" type="text" disabled /> <button class="submit" disabled >Send</button></p>
+
         <h4>Messages Received:</h4>
         <div id="waiting">Waiting...</div>
         <div id="messages"></div>
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.slim.js"></script>
+    <script src="https://cdn.jsdelivr.net/combine/npm/jquery@2/dist/jquery.min.js,npm/socket.io-client@2.3/dist/socket.io.slim.min.js,npm/sprintf-js@1.1/src/sprintf.min.js"></script>
 
     <script>
 
-        const socket = io.connect( 'http://127.0.0.1:3000', { reconnection: true } ); // Set reconnection to false to disable automatic reconnection
+        const url = 'http://127.0.0.1:3000';
+        const socket = io.connect( url, { reconnection: true } ); // Set reconnection to false to disable automatic reconnection
 
         (function($) {
 
             var socket_name = 'my-socket-name';
-            var msg = $( '#messages' ), status = $( '#status' );
+            var msg = $( '#messages' ), status = $( '#status' ), submit_buttom = $( 'button.submit' ), message_to_send = $( '#message_to_send' );
 
             // Set connection state
             socket.on( 'connect', function() {
 
                 status.attr( 'data-connected', true ).html( 'Connected' );
+                submit_buttom.removeAttr( 'disabled' );
+                message_to_send.removeAttr( 'disabled' );
                 console.info( 'Connected: ' + socket_name );
 
             }).on( 'disconnect', function( reason ) {
 
                 status.removeAttr( 'data-connected' ).html( 'Disconnected' );
+                submit_buttom.attr( 'disabled', 'disabled' );
+                message_to_send.attr( 'disabled', 'disabled' );
                 console.info( 'Connected: ' + socket_name );
 
             });
@@ -73,6 +81,33 @@
 
                 // Append incoming messages to element
                 msg.append( '<p class="message">' + payload.content + '</p>' );
+            });
+
+            // Send button event handler
+            submit_buttom.on( 'click', function( event ) {
+
+                event.preventDefault();
+                if( !message_to_send.val().trim() ) {
+                    message_to_send.addClass( 'empty' );
+                    return;
+                }
+                message_to_send.removeClass( 'empty' );
+
+                // Send message to Socket.IO
+                jQuery.ajax ({
+                    url: url + '/send/' + socket_name,
+                    type: 'POST',
+                    data: JSON.stringify({
+                        content: message_to_send.val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function( response ){
+                        message_to_send.val( '' );
+                        console.log( 'Message sent: ', response );
+                    }
+                });
+
             });
 
         })( window.jQuery );
