@@ -5,10 +5,14 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
 
 (function($) {
 
+    // Initialize Socket.IO
     var socket_name = 'my-socket-name'; // Name as you wish
-    var status = $( '#status' ), submit_button = $( 'button.submit' ), simple_notification = $( '#simple_notification' ), simple_notification_color = $( '#simple_notification_color' );
-    var notify = $.noist( { position: 'bottom left' } );
-    notify.options.duration = 1500;
+    var status = $( '#status' ), submit_button = $( 'button.submit' );
+
+    // Configure notifications
+    var notifySimple = $.noist( { position: 'bottom left', delay: 6000 } ),
+        notifyAdvanced = $.noist( { position: 'bottom left', delay: 7000, limit: 1, stopOnLimit: true, limitEffect: 'hide' } ); // Only one at a time
+    var advancedTemplate = '<a href="%s" class="notification"><span class="notify-content"><span class="notify-image" style="background-image: url(\'%s\'); display: none;"></span><span class="notify-content">%s</span></span><div style="clear: left;"></div></a>';
 
     // Display connection state
     socket.on( 'connect', function() {
@@ -32,9 +36,20 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
 
         console.log( `Recevied [${socket_name}]`, response );
 
-        // Display notification - For this example, I am displaying a slide-out message on the demo page.
         // You can consume the response data as you desire and for your own needs.
-        notify.message( response.message, response.color );
+        if( typeof response.type !== 'undefined' && response.type == 'advanced' ) {
+
+            // Display advanced notification using a template
+            notifyAdvanced.message( sprintf( advancedTemplate, response.link, response.image, response.message ), 'white' );
+            $( '.notification' ).parent().parent().addClass( 'notify-advanced' );
+            if( typeof response.image !== 'undefined' ) $( 'span.notify-image' ).show();
+
+        } else {
+
+            // Display simple, Growl-style notification
+            notifySimple.message( response.message, response.color );
+
+        }
 
     });
 
@@ -44,30 +59,51 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
         event.preventDefault();
 
         // Disallow submitting empty messages
-        if( !$( 'input' ).val().trim() ) {
-            $( 'input' ).addClass( 'empty' );
+        var notification_message = $( '#notification_message' );
+        if( !notification_message.val().trim() ) {
+            notification_message.addClass( 'empty' );
             return;
         }
-        simple_notification.removeClass( 'empty' );
+        notification_message.removeClass( 'empty' );
 
         // Send message to Socket.IO endpoint
         jQuery.ajax ({
             url: url + '/send/' + socket_name,
             type: 'POST',
             data: JSON.stringify({
-                message: simple_notification.val(),
-                color: simple_notification_color.val()
+                type: $( '#notification_type' ).val(),
+                message: notification_message.val(),
+                link: $( '#notification_link' ).val(),
+                image: $( '#notification_image' ).val(),
+                color: $( '#notification_color' ).val()
             }),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function( response ){
 
-                simple_notification.val( '' );
+                $( 'input' ).val( '' );
                 console.log( 'Message sent: ', response );
 
             }
         });
 
+    });
+
+    // Modify form when type is selected
+    $( '#notification_type' ).on( 'change', function( event ) {
+        if( $( this ).val() == 'simple' ) {
+
+            $( '#notification_link' ).parent().parent().hide();
+            $( '#notification_image' ).parent().parent().hide();
+            $( '#notification_color' ).parent().parent().show();
+
+        } else {
+
+            $( '#notification_link' ).parent().parent().show();
+            $( '#notification_image' ).parent().parent().show();
+            $( '#notification_color' ).parent().parent().hide();
+
+        }
     });
 
 })( window.jQuery );

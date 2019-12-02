@@ -33,8 +33,8 @@ These are just examples - you can relay any data to any number of sockets that y
 
 ### Goals
 
-- [x] Add Growl-style example
-- [ ] Add example with custom template and image
+- [x] Add simple Growl-style example
+- [x] Add advanced example with custom template and image
 - [ ] Improve input validation
 - [ ] Improve exception handling
 - [ ] WordPress plugin and integrations
@@ -53,10 +53,10 @@ npm run start
 
 ## Usage
 
-Once the server is running:
-
 1. Visit [http://localhost:3000/](http://localhost:3000/) in your web browser to bring up the client-side browser demo (disabled if `demo_page` is false in [config](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Configuration)).
 2. Use [Postman](https://www.getpostman.com/) or cURL to send a POST to the `/send` endpoint:
+
+**Send a Simple Notification**
 
 ```bash
 curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
@@ -64,6 +64,19 @@ curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
   -d '{
     "message": "Hello world!",
     "color": "info"
+}'
+```
+
+**Send an Advanced Notification**
+
+```bash
+curl -X POST 'http://localhost:3000/send/my-socket-name?api_key=YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"type": "advanced",
+	"message": "Someone in Chicago, USA just bought a <strong>Toolbox Widget/Modular Toolbox Wrench Organizer</strong>!",
+	"link": "https://smile.amazon.com/dp/B07H6FJY9D/",
+	"image": "https://picsum.photos/id/237/200/200"
 }'
 ```
 
