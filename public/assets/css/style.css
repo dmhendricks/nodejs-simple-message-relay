@@ -1,34 +1,65 @@
 /*! Node.js Simple Message Relay */
-/* line 3, public/src/scss/style.scss */
+/*! Custom style for advanced notification */
+/* line 5, public/src/scss/_advanced-template.scss */
+div.notify-advanced a, div.notify-advanced * {
+  color: #56596B;
+  text-decoration: none;
+}
+
+/* line 10, public/src/scss/_advanced-template.scss */
+div.notify-advanced span {
+  display: block;
+}
+
+/* line 14, public/src/scss/_advanced-template.scss */
+div.notify-advanced .noist-body {
+  padding: 10px !important;
+}
+
+/* line 18, public/src/scss/_advanced-template.scss */
+div.notify-advanced .notify-image {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin-right: 0.7em;
+  background-size: 100% auto;
+}
+
+/* line 26, public/src/scss/_advanced-template.scss */
+div.notify-advanced .notify-content {
+  padding-right: 0.7em;
+}
+
+/* line 5, public/src/scss/style.scss */
 body {
   font-family: Verdana, Geneva, sans-serif;
   margin: 2em;
 }
 
-/* line 8, public/src/scss/style.scss */
+/* line 10, public/src/scss/style.scss */
 a {
   color: #1155CC;
 }
 
-/* line 11, public/src/scss/style.scss */
+/* line 13, public/src/scss/style.scss */
 a:hover {
   color: #0C419E;
 }
 
-/* line 16, public/src/scss/style.scss */
+/* line 18, public/src/scss/style.scss */
 hr {
   background-color: #ccc;
   height: 1px;
   border: none;
 }
 
-/* line 22, public/src/scss/style.scss */
+/* line 24, public/src/scss/style.scss */
 #waiting {
   color: #777;
   font-style: italic;
 }
 
-/* line 27, public/src/scss/style.scss */
+/* line 29, public/src/scss/style.scss */
 p.message {
   color: #0c5460;
   background-color: #d1ecf1;
@@ -36,7 +67,7 @@ p.message {
   padding: 0.5em 0.7em;
 }
 
-/* line 34, public/src/scss/style.scss */
+/* line 36, public/src/scss/style.scss */
 #status {
   color: #721c24;
   background-color: #f8d7da;
@@ -45,32 +76,32 @@ p.message {
   font-size: 0.95em;
 }
 
-/* line 41, public/src/scss/style.scss */
+/* line 43, public/src/scss/style.scss */
 #status[data-connected="true"] {
   color: #155724;
   background-color: #d4edda;
   border: 1px solid #c3e6cb;
 }
 
-/* line 48, public/src/scss/style.scss */
+/* line 50, public/src/scss/style.scss */
 table {
   width: 100%;
 }
 
-/* line 51, public/src/scss/style.scss */
+/* line 53, public/src/scss/style.scss */
 table td:first-child {
   text-align: right;
   font-weight: 500;
   width: 100px;
 }
 
-/* line 57, public/src/scss/style.scss */
+/* line 59, public/src/scss/style.scss */
 input {
   width: 50%;
   max-width: 400px;
 }
 
-/* line 62, public/src/scss/style.scss */
+/* line 64, public/src/scss/style.scss */
 input.empty {
   border: 1px solid #E87575;
 }

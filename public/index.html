@@ -21,16 +21,33 @@
 
         <hr />
 
-        <h4>Send Simple Notification</h4>
+        <h4>Send Notification</h4>
         <table>
             <tr>
-                <td>Message:</td>
-                <td><input id="simple_notification" type="text" disabled /></td>
+                <td>Type:</td>
+                <td>
+                    <select id="notification_type">
+                        <option value="simple">Simple</option>
+                        <option value="advanced" selected>Advanced</option>
+                    </select>
+                </td>
             </tr>
             <tr>
+                <td>Message:</td>
+                <td><input id="notification_message" type="text" disabled /></td>
+            </tr>
+            <tr>
+                <td>Link:</td>
+                <td><input id="notification_link" type="url" value="https://smile.amazon.com/dp/B07H6FJY9D/" disabled /></td>
+            </tr>
+            <tr>
+                <td>Image:</td>
+                <td><input id="notification_image" type="url" value="https://picsum.photos/id/237/200/200" disabled /></td>
+            </tr>
+            <tr style="display: none;">
                 <td>Color:</td>
                 <td>
-                    <select id="simple_notification_color" disabled>
+                    <select id="notification_color" disabled>
                         <option value="">Default</option>
                         <option value="white">White</option>
                         <option value="success">Success</option>
