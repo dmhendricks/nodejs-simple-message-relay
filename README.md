@@ -15,6 +15,8 @@ A simple example of using [Node.js](https://nodejs.org/) to send Growl-style mes
 	- [Client-Side Example Code](https://github.com/dmhendricks/nodejs-simple-message-relay/wiki/Client-Side-Example-Code)
 - [Screenshot](#screenshot)
 
+:pushpin: Available on Docker Hub: [hendridm/socketio-relay](https://hub.docker.com/r/hendridm/socketio-relay)
+
 ### Requirements
 
 - [Node.js](https://nodejs.org/)
