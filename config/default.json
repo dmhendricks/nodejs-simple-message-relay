@@ -1,7 +1,7 @@
 {
     "server": {
         "port": 3000,
-        "address": "localhost"
+        "address": "0.0.0.0"
     },
     "cors": {
         "origins": [ "*" ]

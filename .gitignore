@@ -5,6 +5,7 @@ Thumbs.db
 *.bak
 *.log
 *.swp
+*.code-workspace
 
 # Configuration Files
 config/*
@@ -12,5 +13,3 @@ config/*
 
 # Development - General
 node_modules/
-public/src/vendor/noist/
-package-lock.json

@@ -1,49 +1,54 @@
 /**
- * NodePop - Simple Node.js server to send and receive messages using Restify and Socket.IO
+ * NodePop - Simple Node.js server to send and receive messages using Express and Socket.IO
  *
+ * @license Apache-2.0
  * @author Daniel M. Hendricks
+ * @see {@link https://github.com/dmhendricks/nodejs-simple-message-relay}
  */
 
 const
     config = require( 'config' ),
-    corsMiddleware = require( 'restify-cors-middleware' ),
-    errors = require( 'restify-errors' ),
-    restify = require( 'restify' ),
+    cors = require( 'cors' ),
+    createError = require( 'http-errors' ),
+    express = require( 'express' ),
+    http = require( 'http' ),
     socketio = require( 'socket.io' );
 
 const
-    server = restify.createServer(),
-    io = socketio.listen( server.server ),
-    cors = corsMiddleware( config.get( 'cors' ) );
+    app = express(),
+    server = http.createServer( app ),
+    io = socketio( server, { cors: config.get( 'cors' ) } );
 
-server.use( restify.plugins.queryParser() );
-server.use( restify.plugins.bodyParser() );
-server.pre( cors.preflight );
-server.use( cors.actual );
+app.use( cors( config.get( 'cors' ) ) );
+app.use( express.json() );
+app.use( express.urlencoded({ extended: true }) );
 
 // Serve static files under ./public
 if( config.get( 'demo_page' ) ) {
 
-    server.get( '/*', restify.plugins.serveStatic({
-        directory: __dirname + '/public',
-        default: 'index.html',
-    }));
+    app.use( express.static( __dirname + '/public' ) );
 
 }
 
 // Relay messages to connected clients
-server.post( '/send/:socket', function( req, res, next ) {
+app.post( '/send/:socket', function( req, res, next ) {
 
     if( config.get( 'api_keys' ).length && ( typeof req.query.api_key === 'undefined' || !config.get( 'api_keys' ).includes( req.query.api_key ) ) ) {
-        next( new errors.BadRequestError( 'Invalid API key' ) );
+        next( createError( 400, 'Invalid API key', { code: 'BadRequest' } ) );
     } else if( config.get( 'sockets' ).length && !config.get( 'sockets' ).includes( req.params.socket ) ) {
-        next( new errors.BadRequestError( 'Invalid socket name' ) );
+        next( createError( 400, 'Invalid socket name', { code: 'BadRequest' } ) );
     } else {
         io.emit( req.params.socket, req.body );
         res.send( req.body );
-        next();
     }
 
 });
 
-server.listen( config.get( 'server.port' ), config.get( 'server.address' ), () => console.log( `Listening at ${server.url}` ) );
+app.use( function( err, req, res, next ) {
+    res.status( err.status || 500 ).json({ code: err.code || 'InternalError', message: err.message });
+});
+
+server.listen( config.get( 'server.port' ), config.get( 'server.address' ), () => {
+    const addr = server.address();
+    console.log( `Listening at http://${addr.address}:${addr.port}` );
+});

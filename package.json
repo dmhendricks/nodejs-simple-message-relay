@@ -14,29 +14,33 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "clean": "rm -rf public/assets/css/*.css public/assets/js/*.js",
+    "build:js": "node esbuild.config.js --prod",
+    "watch:js": "node esbuild.config.js --watch",
+    "build:css": "node build-css.js --prod",
+    "watch:css": "node build-css.js --watch",
+    "build": "npm run clean && npm-run-all --parallel build:js build:css",
+    "dev:assets": "npm-run-all --parallel watch:js watch:css"
   },
   "dependencies": {
     "config": "^3.2.4",
-    "restify": "^8.4.0",
-    "restify-cors-middleware": "^1.1.1",
-    "restify-errors": "^8.0.1",
-    "socket.io": "^2.1.1",
-    "socket.io-client": "^2.1.1"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "http-errors": "^2.0.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.20",
     "basecss": "^0.3.2",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-csso": "^4.0.1",
-    "gulp-line-ending-corrector": "^1.0.3",
-    "gulp-notify": "^3.2.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-terser": "^1.2.0",
+    "cssnano": "^7.0.6",
+    "esbuild": "^0.24.2",
     "jquery": "^3.4.1",
     "nodemon": "^2.0.1",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.49",
+    "sass": "^1.83.0",
     "sprintf-js": "^1.1.2"
   }
 }
