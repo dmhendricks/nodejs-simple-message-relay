@@ -28,9 +28,8 @@ const DEST = './public/assets/js';
  */
 const vendorFiles = [
     './node_modules/jquery/dist/jquery.min.js',
-    './node_modules/sprintf-js/dist/sprintf.min.js',
     './node_modules/socket.io-client/dist/socket.io.min.js',
-    `${SRC}/vendor/notify.min.js`,
+    './node_modules/toastify-js/src/toastify.js',
 ];
 
 async function buildJS() {

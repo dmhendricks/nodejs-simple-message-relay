@@ -24,7 +24,7 @@ const DEST = './public/assets/css';
 
 const vendorFiles = [
     './node_modules/@picocss/pico/css/pico.min.css',
-    `${SRC}/vendor/notify.min.css`,
+    './node_modules/toastify-js/src/toastify.css',
 ];
 
 async function buildCSS() {

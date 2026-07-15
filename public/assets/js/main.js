@@ -16,10 +16,48 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
         advanced: 'Someone in Chicago, USA just bought a <strong>Toolbox Widget/Modular Toolbox Wrench Organizer!</strong>'
     };
 
-    // Configure notifications
-    var notifySimple = $.noist( { position: 'bottom left', delay: 6000 } ),
-        notifyAdvanced = $.noist( { position: 'bottom left', delay: 7000, limit: 1, stopOnLimit: true, limitEffect: 'hide' } ); // Only one at a time
-    var advancedTemplate = '<a href="%s" class="notification"><span class="notify-content"><span class="notify-image" style="background-image: url(\'%s\'); display: none;"></span><span class="notify-content">%s</span></span><div style="clear: left;"></div></a>';
+    // Named colors map to background colors for simple notifications
+    var notifyColors = {
+        white: '#fff',
+        success: '#9CCC65',
+        info: '#4FC3F7',
+        warning: '#FFC107',
+        error: '#E57373'
+    };
+
+    var currentAdvancedToast = null; // Only one advanced notification at a time
+
+    function showSimpleNotification( message, color ) {
+        Toastify({
+            text: message,
+            gravity: 'bottom',
+            position: 'left',
+            duration: 6000,
+            close: true,
+            style: { background: notifyColors[ color ] || '#757575' }
+        }).showToast();
+    }
+
+    function showAdvancedNotification( message, link, image ) {
+        if( currentAdvancedToast ) currentAdvancedToast.hideToast();
+
+        var node = document.createElement( 'div' );
+        node.className = 'notify-advanced';
+        node.innerHTML = '<span class="notify-content"><span class="notify-image" style="background-image: url(\'' + image + '\'); display: none;"></span><span class="notify-content">' + message + '</span></span><div style="clear: left;"></div>';
+        if( typeof image !== 'undefined' && image ) $( node ).find( '.notify-image' ).show();
+
+        currentAdvancedToast = Toastify({
+            node: node,
+            gravity: 'bottom',
+            position: 'left',
+            duration: 7000,
+            close: true,
+            style: { background: '#fff' },
+            destination: link || undefined,
+            callback: function() { currentAdvancedToast = null; }
+        });
+        currentAdvancedToast.showToast();
+    }
 
     // Display connection state
     socket.on( 'connect', function() {
@@ -46,15 +84,13 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
         // You can consume the response data as you desire and for your own needs.
         if( typeof response.type !== 'undefined' && response.type == 'advanced' ) {
 
-            // Display advanced notification using a template
-            notifyAdvanced.message( sprintf( advancedTemplate, response.link, response.image, response.message ), 'white' );
-            $( '.notification' ).parent().parent().addClass( 'notify-advanced' );
-            if( typeof response.image !== 'undefined' ) $( 'span.notify-image' ).show();
+            // Display advanced notification with image and link
+            showAdvancedNotification( response.message, response.link, response.image );
 
         } else {
 
             // Display simple, Growl-style notification
-            notifySimple.message( response.message, response.color );
+            showSimpleNotification( response.message, response.color );
 
         }
 

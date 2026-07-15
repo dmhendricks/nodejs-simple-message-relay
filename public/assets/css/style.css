@@ -1,14 +1,49 @@
+@charset "UTF-8";
 /*! Node.js Simple Message Relay */
+/*! Toast notification styling — restores the previous Noist-style appearance */
+.toastify {
+  width: 300px;
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.07);
+  background-image: none;
+}
+
+@media (max-width: 500px) {
+  .toastify {
+    width: 160px;
+  }
+}
+.toast-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 16px;
+  color: inherit;
+  opacity: 0.3;
+}
+.toast-close:hover {
+  opacity: 0.5;
+}
+
 /*! Custom style for advanced notification */
+.toastify:has(> .notify-advanced) {
+  padding: 10px;
+}
+
 div.notify-advanced a, div.notify-advanced * {
   color: #56596B;
   text-decoration: none;
 }
 div.notify-advanced span {
   display: block;
-}
-div.notify-advanced .noist-body {
-  padding: 10px !important;
 }
 div.notify-advanced .notify-image {
   float: left;
@@ -19,6 +54,7 @@ div.notify-advanced .notify-image {
 }
 div.notify-advanced .notify-content {
   padding-right: 0.7em;
+  font-size: 14px;
 }
 
 #status {
