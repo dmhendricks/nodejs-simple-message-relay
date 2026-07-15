@@ -6,6 +6,7 @@
     <title>Simple Message Relay Demo</title>
     <meta name="description" content="Simple Message Relay Demo" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
 
     <link rel="stylesheet" href="assets/css/vendor.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -13,7 +14,7 @@
 </head>
 <body>
 
-    <main id="content">
+    <main id="content" class="container">
 
         <h2>Simple Message Relay - Browser Demo</h2>
         <p>See the <a href="https://github.com/dmhendricks/nodejs-simple-message-relay/#usage" target="_blank">GitHub project page</a> for usage instructions.</p>
@@ -22,46 +23,48 @@
         <hr />
 
         <h4>Send Notification</h4>
-        <table>
-            <tr>
-                <td>Type:</td>
-                <td>
-                    <select id="notification_type">
-                        <option value="simple">Simple</option>
-                        <option value="advanced" selected>Advanced</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Message:</td>
-                <td><input id="notification_message" type="text" disabled /></td>
-            </tr>
-            <tr>
-                <td>Link:</td>
-                <td><input id="notification_link" type="url" value="https://smile.amazon.com/dp/B07H6FJY9D/" disabled /></td>
-            </tr>
-            <tr>
-                <td>Image:</td>
-                <td><input id="notification_image" type="url" value="https://picsum.photos/id/237/200/200" disabled /></td>
-            </tr>
-            <tr style="display: none;">
-                <td>Color:</td>
-                <td>
-                    <select id="notification_color" disabled>
-                        <option value="">Default</option>
-                        <option value="white">White</option>
-                        <option value="success">Success</option>
-                        <option value="info">Info</option>
-                        <option value="warning">Warning</option>
-                        <option value="error">Error</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td />
-                <td><button class="submit" disabled >Send</button></td>
-            </tr>
-        </table>
+        <form>
+
+            <label for="notification_type">
+                Type
+                <select id="notification_type">
+                    <option value="advanced" selected>Advanced</option>
+                    <option value="simple">Simple</option>
+                </select>
+            </label>
+
+            <label for="notification_message">
+                Message
+                <input id="notification_message" type="text" disabled />
+            </label>
+
+            <div class="grid notification-row-advanced">
+                <label for="notification_link">
+                    Link
+                    <input id="notification_link" type="url" value="https://smile.amazon.com/dp/B07H6FJY9D/" disabled />
+                </label>
+
+                <label for="notification_image">
+                    Image
+                    <input id="notification_image" type="url" value="https://picsum.photos/id/237/200/200" disabled />
+                </label>
+            </div>
+
+            <label for="notification_color" class="notification-row-simple" style="display: none;">
+                Color
+                <select id="notification_color" disabled>
+                    <option value="">Default</option>
+                    <option value="white">White</option>
+                    <option value="success">Success</option>
+                    <option value="info" selected>Info</option>
+                    <option value="warning">Warning</option>
+                    <option value="error">Error</option>
+                </select>
+            </label>
+
+            <button class="submit" type="submit" disabled>Send</button>
+
+        </form>
 
     </main>
 

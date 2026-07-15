@@ -23,8 +23,8 @@ const SRC = './public/src';
 const DEST = './public/assets/css';
 
 const vendorFiles = [
+    './node_modules/@picocss/pico/css/pico.min.css',
     `${SRC}/vendor/notify.min.css`,
-    `${SRC}/vendor/basecss.min.css`,
 ];
 
 async function buildCSS() {

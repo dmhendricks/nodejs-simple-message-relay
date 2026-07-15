@@ -8,6 +8,13 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
     // Initialize Socket.IO
     var socket_name = 'my-socket-name'; // Name as you wish
     var status = $( '#status' ), submit_button = $( 'button.submit' );
+    var notification_message = $( '#notification_message' );
+
+    // Default message text shown per notification type
+    var defaultMessages = {
+        simple: 'Hello world',
+        advanced: 'Someone in Chicago, USA just bought a <strong>Toolbox Widget/Modular Toolbox Wrench Organizer!</strong>'
+    };
 
     // Configure notifications
     var notifySimple = $.noist( { position: 'bottom left', delay: 6000 } ),
@@ -59,7 +66,6 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
         event.preventDefault();
 
         // Disallow submitting empty messages
-        var notification_message = $( '#notification_message' );
         if( !notification_message.val().trim() ) {
             notification_message.addClass( 'empty' );
             return;
@@ -81,7 +87,7 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
             contentType: "application/json; charset=utf-8",
             success: function( response ){
 
-                $( 'input' ).val( '' );
+                notification_message.val( defaultMessages[ $( '#notification_type' ).val() ] || '' );
                 console.log( 'Message sent: ', response );
 
             }
@@ -91,19 +97,22 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
 
     // Modify form when type is selected
     $( '#notification_type' ).on( 'change', function( event ) {
-        if( $( this ).val() == 'simple' ) {
+        var type = $( this ).val();
 
-            $( '#notification_link' ).parent().parent().hide();
-            $( '#notification_image' ).parent().parent().hide();
-            $( '#notification_color' ).parent().parent().show();
+        if( type == 'simple' ) {
+
+            $( '.notification-row-advanced' ).hide();
+            $( '.notification-row-simple' ).show();
 
         } else {
 
-            $( '#notification_link' ).parent().parent().show();
-            $( '#notification_image' ).parent().parent().show();
-            $( '#notification_color' ).parent().parent().hide();
+            $( '.notification-row-advanced' ).show();
+            $( '.notification-row-simple' ).hide();
 
         }
-    });
+
+        notification_message.val( defaultMessages[ type ] || '' );
+
+    }).trigger( 'change' );
 
 })( window.jQuery );

@@ -50,5 +50,5 @@ app.use( function( err, req, res, next ) {
 
 server.listen( config.get( 'server.port' ), config.get( 'server.address' ), () => {
     const addr = server.address();
-    console.log( `Listening at http://${addr.address}:${addr.port}` );
+    console.log( `Listening at http://localhost:${addr.port}` );
 });

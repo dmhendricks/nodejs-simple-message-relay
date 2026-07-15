@@ -21,36 +21,6 @@ div.notify-advanced .notify-content {
   padding-right: 0.7em;
 }
 
-body {
-  font-family: Verdana, Geneva, sans-serif;
-  margin: 2em;
-}
-
-a {
-  color: #1155CC;
-}
-a:hover {
-  color: #0C419E;
-}
-
-hr {
-  background-color: #ccc;
-  height: 1px;
-  border: none;
-}
-
-#waiting {
-  color: #777;
-  font-style: italic;
-}
-
-p.message {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border: 1px solid #bee5eb;
-  padding: 0.5em 0.7em;
-}
-
 #status {
   color: #721c24;
   background-color: #f8d7da;
@@ -64,19 +34,6 @@ p.message {
   border: 1px solid #c3e6cb;
 }
 
-table {
-  width: 100%;
-}
-table td:first-child {
-  text-align: right;
-  font-weight: 500;
-  width: 100px;
-}
-
-input {
-  width: 50%;
-  max-width: 400px;
-}
 input.empty {
-  border: 1px solid #E87575;
+  border-color: #E87575;
 }
