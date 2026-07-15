@@ -16,25 +16,26 @@ const socket = io.connect( url, { reconnection: true } ); // Set reconnection to
         advanced: 'Someone in Chicago, USA just bought a <strong>Toolbox Widget/Modular Toolbox Wrench Organizer!</strong>'
     };
 
-    // Named colors map to background colors for simple notifications
+    // Named colors map to background/text colors for simple notifications
     var notifyColors = {
-        white: '#fff',
-        success: '#9CCC65',
-        info: '#4FC3F7',
-        warning: '#FFC107',
-        error: '#E57373'
+        white: { background: '#fff', color: '#616161' },
+        success: { background: '#9CCC65', color: '#fff' },
+        info: { background: '#4FC3F7', color: '#fff' },
+        warning: { background: '#FFC107', color: '#5D4037' },
+        error: { background: '#E57373', color: '#fff' }
     };
 
     var currentAdvancedToast = null; // Only one advanced notification at a time
 
     function showSimpleNotification( message, color ) {
+        var colors = notifyColors[ color ] || { background: '#757575', color: '#fff' };
         Toastify({
             text: message,
             gravity: 'bottom',
             position: 'left',
             duration: 6000,
             close: true,
-            style: { background: notifyColors[ color ] || '#757575' }
+            style: { background: colors.background, color: colors.color }
         }).showToast();
     }
 
