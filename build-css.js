@@ -9,12 +9,12 @@
  *   node build-css.js --watch  (development watch mode)
  */
 
-const fs = require( 'fs' );
-const path = require( 'path' );
-const sass = require( 'sass' );
-const postcss = require( 'postcss' );
-const autoprefixer = require( 'autoprefixer' );
-const cssnano = require( 'cssnano' );
+import fs from 'fs';
+import path from 'path';
+import * as sass from 'sass';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 const args = process.argv.slice( 2 );
 const isWatch = args.includes( '--watch' );

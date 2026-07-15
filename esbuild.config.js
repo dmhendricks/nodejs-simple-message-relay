@@ -10,9 +10,9 @@
  *   node esbuild.config.js --watch  (development watch mode)
  */
 
-const fs = require( 'fs' );
-const path = require( 'path' );
-const esbuild = require( 'esbuild' );
+import fs from 'fs';
+import path from 'path';
+import esbuild from 'esbuild';
 
 const args = process.argv.slice( 2 );
 const isWatch = args.includes( '--watch' );

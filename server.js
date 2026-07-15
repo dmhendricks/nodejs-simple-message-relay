@@ -6,18 +6,21 @@
  * @see {@link https://github.com/dmhendricks/nodejs-simple-message-relay}
  */
 
-const
-    config = require( 'config' ),
-    cors = require( 'cors' ),
-    createError = require( 'http-errors' ),
-    express = require( 'express' ),
-    http = require( 'http' ),
-    socketio = require( 'socket.io' );
+import { Server as SocketIOServer } from 'socket.io';
+import { fileURLToPath } from 'url';
+import config from 'config';
+import cors from 'cors';
+import createError from 'http-errors';
+import express from 'express';
+import http from 'http';
+import path from 'path';
+
+const __dirname = path.dirname( fileURLToPath( import.meta.url ) );
 
 const
     app = express(),
     server = http.createServer( app ),
-    io = socketio( server, { cors: config.get( 'cors' ) } );
+    io = new SocketIOServer( server, { cors: config.get( 'cors' ) } );
 
 app.use( cors( config.get( 'cors' ) ) );
 app.use( express.json() );
@@ -26,7 +29,7 @@ app.use( express.urlencoded({ extended: true }) );
 // Serve static files under ./public
 if( config.get( 'demo_page' ) ) {
 
-    app.use( express.static( __dirname + '/public' ) );
+    app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 }
 
